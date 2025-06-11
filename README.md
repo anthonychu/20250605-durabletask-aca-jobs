@@ -1,13 +1,13 @@
-# Durable Task Framework with Azure Container Apps Jobs
+# Durable Task Scheduler with Azure Container Apps Jobs
 
-This project demonstrates how to use the Durable Task Framework with Azure Container Apps Jobs to implement a fan-out/fan-in pattern for video transcription at scale.
+This project demonstrates how to use the Durable Task Scheduler with Azure Container Apps Jobs to implement a fan-out/fan-in pattern for video transcription at scale.
 
 ## Architecture
 
 The solution consists of two main components:
 
 ### 1. DTS Worker (`src/dts-worker/`)
-A Durable Task Framework worker that orchestrates the video transcription workflow:
+A Durable Task Scheduler worker that orchestrates the video transcription workflow:
 - **Orchestrator**: Implements a fan-out/fan-in pattern to process multiple videos in parallel
 - **Activity Functions**: Fetch video URLs and manage Azure Container Apps job executions
 - **Suborchestrator**: Manages individual Container Apps job lifecycles
@@ -135,7 +135,7 @@ To start a video transcription workflow, send a request to your Durable Task orc
 
 ```python
 # Example session codes from Microsoft Build sessions
-session_codes = ["BRK101", "BRK102", "BRK103"]
+session_codes = ["DEM520", "DEM499", "DEM541", "DEM563"]
 ```
 
 The orchestrator will:
@@ -147,7 +147,7 @@ The orchestrator will:
 ## Key Features
 
 - **Scalable**: Process multiple videos in parallel using Azure Container Apps jobs
-- **Resilient**: Durable Task Framework provides automatic retries and failure handling
+- **Resilient**: Durable Task Scheduler provides automatic retries and failure handling
 - **Cost-effective**: Container Apps jobs scale to zero when not in use
 - **Flexible**: Easy to modify for different video sources or transcription models
 
@@ -156,7 +156,7 @@ The orchestrator will:
 ### DTS Worker
 - `azure-identity`: Azure authentication
 - `azure-mgmt-appcontainers`: Container Apps management
-- `durabletask-azuremanaged`: Durable Task Framework for Azure
+- `durabletask-azuremanaged`: Durable Task Scheduler for Azure
 - `python-dotenv`: Environment variable management
 
 ### Transcribe Video Job
