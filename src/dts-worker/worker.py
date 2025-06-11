@@ -21,10 +21,6 @@ logger = logging.getLogger(__name__)
 def video_transcript_fan_out_fan_in_orchestrator(ctx: task.OrchestrationContext, session_codes: list) -> Generator[Any, Any, Any]:
 
     logger.info(f"Starting fan out/fan in orchestration with {len(session_codes)} items")
-    
-    # subscription_id = "ef90e930-9d7f-4a60-8a99-748e0eea69de"
-    # resource_group = "20250609-dts-jobs"
-    # job_name = "transcribe-video-job"
 
     subscription_id = os.getenv("SUBSCRIPTION_ID")
     resource_group = os.getenv("RESOURCE_GROUP")
