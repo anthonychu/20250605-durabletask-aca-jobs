@@ -4,7 +4,7 @@
 
 The Durable Task Scheduler is a distributed task scheduling framework that enables developers to write reliable, stateful workflows using familiar programming constructs. Azure Container Apps jobs are serverless, containerized compute resources, including GPUs, that run to completion and automatically scale based on demand.
 
-While Azure Container Apps Jobs can be triggered in various ways (manually, on schedule, or via events), orchestrating complex workflows—such as running jobs sequentially, implementing fan-out/fan-in patterns, or coordinating multiple interdependent tasks—presents significant challenges without proper orchestration tools.
+While Azure Container Apps jobs can be triggered in various ways (manually, on schedule, or via events), orchestrating complex workflows—such as running jobs sequentially, implementing fan-out/fan-in patterns, or coordinating multiple interdependent tasks—presents significant challenges without proper orchestration tools.
 
 This is where the Durable Task Scheduler excels: it provides a robust framework for orchestrating Container Apps Jobs with built-in support for workflow patterns like fan-out/fan-in, sequential execution, error handling, retries, and long-running stateful processes. By combining DTS with Azure Container Apps Jobs, you can build scalable, resilient workflows that automatically handle failures and provide visibility into execution progress.
 
