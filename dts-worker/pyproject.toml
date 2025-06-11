@@ -1,0 +1,12 @@
+[project]
+name = "20250605-durabletask-aca-jobs"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "azure-identity>=1.23.0",
+    "azure-mgmt-appcontainers>=3.2.0",
+    "durabletask-azuremanaged>=0.2.0",
+    "python-dotenv>=1.1.0",
+]
