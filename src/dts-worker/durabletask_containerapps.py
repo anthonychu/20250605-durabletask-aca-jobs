@@ -1,37 +1,18 @@
-# Configure logging
-from datetime import timedelta
 import logging
+from datetime import timedelta
 from typing import Any, Generator
-from durabletask import task
+
+from azure.identity import DefaultAzureCredential
 from azure.mgmt.appcontainers import ContainerAppsAPIClient
 from azure.mgmt.appcontainers.models import EnvironmentVar
-from azure.identity import DefaultAzureCredential
-from durabletask.azuremanaged.worker import DurableTaskSchedulerWorker
+from durabletask import task
 
+from utils import ReplaySafeLogger
 
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-class ReplaySafeLogger():
-    def __init__(self, logger):
-        self.logger = logger
-
-    def info(self, ctx: task.OrchestrationContext, message):
-        if not ctx.is_replaying:
-            self.logger.info(message)
-
-    def error(self, ctx: task.OrchestrationContext, message):
-        if not ctx.is_replaying:
-            self.logger.error(message)
-    
-    def debug(self, ctx: task.OrchestrationContext, message):
-        if not ctx.is_replaying:
-            self.logger.debug(message)
-
-    def warning(self, ctx: task.OrchestrationContext, message):
-        if not ctx.is_replaying:
-            self.logger.warning(message)
 
 replay_safe_logger = ReplaySafeLogger(logger)
 
@@ -81,6 +62,7 @@ def start_container_apps_job_execution(ctx, input) -> str:
     client = ContainerAppsAPIClient(job_credential, subscription_id)
     job_template = None
 
+    # if there are environment variables to override
     if len(env) > 0:
         logger.info(f"Overriding environment variables for job {job_name} in resource group {resource_group}")
         job_template = client.jobs.get(resource_group, job_name).template
@@ -90,7 +72,6 @@ def start_container_apps_job_execution(ctx, input) -> str:
         if not first_container.env:
             first_container.env = []
         for env_var in env:
-            # Check if the environment variable already exists
             existing_env_var = next((e for e in first_container.env if e.name == env_var["name"]), None)
             if existing_env_var:
                 existing_env_var.value = env_var["value"]
